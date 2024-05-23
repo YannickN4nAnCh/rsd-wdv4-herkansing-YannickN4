@@ -13,7 +13,7 @@ $password = $_POST["password"];
 $repeatPass = $_POST["password2"];
 $name = $_POST["name"];
 
-if(filter_var($email, FILTER_VALIDATE_EMAIL) === true)
+if(filter_var($email, FILTER_VALIDATE_EMAIL) === false)
 {
     header("Location:" . $base_url . "/resources/views/login/register.php?msg=email is ongeldig");
 }

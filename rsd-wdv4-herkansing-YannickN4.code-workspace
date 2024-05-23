@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"name": "rsd-wdv4-herkansing-YannickN4",
+			"path": "."
+		},
+		{
+			"name": "docs",
+			"path": "../Web toets/docs"
+		},
+		{
+			"name": "config",
+			"path": "../Web toets/config"
+		}
+	],
+	"settings": {}
+}
