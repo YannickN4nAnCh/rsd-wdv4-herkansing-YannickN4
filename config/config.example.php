@@ -1,10 +1,15 @@
 <?php
 
-//database gegevens
-$dbHost = 'localhost';
-$dbName = 'wdv4toets';
-$dbUser = 'root';
-$dbPass = '';
+// Haal de configuratie op
+require_once 'config.php';
 
-//De url waarop jouw project staat. Géén slash aan het einde.
-$base_url = 'http://rsd-wdv4-herkansing-YannickN4.test';
+try {
+    // Met behulp van PDO zetten we de connectie op, waarna we met setAttribute de manier van errormeldingen weergeven bepalen.
+    $conn = new PDO("mysql:host=$dbHost;dbname=$dbName", $dbUser, $dbPass);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    // Als er een PDOException optreedt, laten we een foutmelding zien.
+    echo "Verbindingsfout: " . $e->getMessage();
+    // Stop de scriptuitvoering als er een fout optreedt.
+    die();
+}

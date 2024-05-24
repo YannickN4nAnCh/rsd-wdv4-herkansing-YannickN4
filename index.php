@@ -2,6 +2,7 @@
 session_start();
 require_once  'config/config.php';
 
+
 if (!isset($_SESSION['user_id'])) {
     header("Location: " . $base_url . "/resources/views/login/login.php");
 }
@@ -45,8 +46,27 @@ foreach ($products as $product): ?>
     <div class="product">
         <img src="/public_html/img/<?php echo $product['image_name']?>" alt="Product 1">
         <h3><?php echo $product['name']?></h3>
-        <p>Voorraad: <?php echo $product['supply']?></p>
-        <p>€<?php echo $product['price']?></p>
+        <p>
+    <?php
+        if ($product['supply'] > 0) {
+            echo "Voorraad: " . $product['supply'];
+        } else {
+            echo "Product niet op voorraad";
+        }
+    ?>
+    </p>
+            <?php 
+            if ($product['discount'] > 0){
+            
+                $a = $product['price'] / 100; // 1%
+                $b = 100 - $product['discount']; //nieuwe %
+                $new_price = $a * $b;
+                echo "<p class= 'line'> € ".$product['price']."</p>" ."<p> € " .$new_price ." </p>" ;
+            
+            } else {
+             echo "<p>€".$product['price']."</p>";
+            }
+            ?> 
         <p><a href="/resources/views/products/edit.php?id=<?php echo $product['id'] ?>">aanpassen</a></p>
         <p>
             <form action="<?php echo $base_url; ?>/App/http/controllers/productController.php" method="post">
